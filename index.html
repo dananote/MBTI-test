@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link rel="stylesheet" href="./style.css">
+    <title>MBTI</title>
+  </head>
+  <body>
+    <div class="wrap">
+
+        <!-- start -->
+
+        <article id="start">
+            <div class="start-wrap-left">
+                <h1 class="start-title">나는 어떤 사람일까?</h1>
+                <p class="start-content">성격 유형별 검사 1분이면 완료!</p>
+                <button class="primary-btn" type="button" onclick="show()">테스트 시작하기</button>
+            </div>
+            <img class="start-img" src="./images/start.png" alt="시작이미지">
+        </article>
+
+        <!-- question -->
+
+        <article id="question">
+
+            <div class="progress mt-5">
+                <div class="progress-bar" role="progressbar" style="width: calc((100/12)*1%)" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+
+            <h3 id="number">Q0</h3>
+            <h2 id="title">테스트 문제 지문</h2>
+            <div class="question-answer">
+                <input id="type" type="hidden" value="EI">
+                <button class="btn-answer" id="A" type="button">rlslelflsldfla;sdlkf;asdkf;aksd;flkas;dlfk</button>
+                <button class="btn-answer" id="B" type="button">선택2</button>
+            </div>
+
+            <input id="EI" type="hidden" value="0">
+            <input id="NS" type="hidden" value="0">
+            <input id="TF" type="hidden" value="0">
+            <input id="PJ" type="hidden" value="0">
+        </article>
+
+
+        <!-- result -->
+
+        <article id="result">
+            <seciton id="MBTI">ENFP</seciton>
+            <img id="img" src="./images/ENFP.png">
+            <h2 id="result-title">나는 재기발랄한 사람!</h2>
+            <div class="result-wrap">
+                <p id="result-content">바로 끓는 청춘의 풀이 이것이다. 인간의 충분히 곳이 바이며, 붙잡아 일월과 것이다. 유소년에게서 이상의 몸이 튼튼하며, 그들은 하여도 바이며, 가슴에 인도하겠다는 그리하였는가?
+                    봄날의 그와 기쁘며, 산야에 넣는 방지하는 이것을 장식하는 끓는 </p>
+            </div>
+        </article>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+    <script>   
+        let num = 1;
+
+        let q = {
+            // EI 
+            1:{"number":"Q1", "title":"아무도 없는 집에 들어가면 어때?", "type":"EI", "A":"너무 외로워. 깜깜하고 너무 조용해", "B":"와~ 드디어 나만의 시간이다. 편하고 행복하다"},
+            2:{"number":"Q2", "title":"취미 생활을 시작할 때 어떤 편이야?", "type":"EI", "A":"일단 동호회에 가입해서 많은 사람들과 어울릴꺼야!", "B":"혼자할 수 있는 취미생활이 좋아"},
+            3:{"number":"Q3", "title":"친구와의 약속이 갑자기 취소되었을 떄", "type":"EI", "A":"안돼..그럼 누굴 만날까? 전화해봐야지!", "B":"와! 갑자기 혼자만의 시간이 생겼잖아 너무 좋아!"},
+
+            // NS
+            4:{"number":"Q4", "title":"사과 하면 뭐가 생각나?'", "type":"NS", "A":"백설공주? 뉴턴! 아님 아침사과 금사과..?", "B":"빨갛다. 맛있다. 과일."},
+            5:{"number":"Q5", "title":"비행기 타기 전에 무슨 생각해?", "type":"NS", "A":"비행기 추락하면 어쩌지..비상구 자리에 앉을까?", "B":"기내식 뭐 나오지? 영화볼까?"},
+            6:{"number":"Q6", "title":"노래들을 때 뭐가 중요해?", "type":"NS", "A":"가사가 너무 중요해~ 가사까지 맘에 들어야 최애곡!", "B":"노래 멜로디지~ 가사가 뭐가 중요해 음악은 Feel이지!"},
+
+            // TF
+            7:{"number":"Q7", "title":"나 우울해서 미용실 갔다왔어", "type":"TF", "A":"펌했어? 염색? 사진찍어서 보내봐", "B":"왜 우울해?ㅠ 무슨일 있어?"},
+            8:{"number":"Q8", "title":"차에 뭐 놓고왔네 어쩌지?", "type":"TF", "A":"나 혼자 다녀올게! 너 할거 하고 있어!", "B":"같이가자! 혼자가면 심심하잖아!"},
+            9:{"number":"Q9", "title":"슬픔을 나누면?", "type":"TF", "A":"둘이 된다. 왜냐면 슬픈 사람이 둘이 되잖아", "B":"반이 된다. 슬픔은 공유해야지!"},
+
+            //PJ
+            10:{"number":"Q10", "title":"뭐하냐~ 심심한데 나와!", "type":"PJ", "A":"오~ 당근 좋지! 어디로 갈까?", "B":"응? 갑자기? 나 오늘 할 일있어"},
+            11:{"number":"Q11", "title":"여행은 어떻게 할까?", "type":"PJ", "A":"음.. 난 다 좋아!", "B":"몇시에 출발해서 밥먹고 어디 잠깐 들리자!"},
+            12:{"number":"Q12", "title":"카카오톡 확인할때", "type":"PJ", "A":"읽지 않은 알람이..매우 많다..!", "B":"읽지 않은 알람이 하나도 없다"},
+        }
+
+        let result = {
+            "ISTJ":{"MBTI":"ISTJ", "img":"./images/ISTJ.png", "result-title":"뭐든 끝까지 해내는 사람!"},
+            "ISFJ":{"MBTI":"ISFJ", "img":"./images/ISFJ.png", "result-title":"협조를 잘하는 사람!"},
+            "INFJ":{"MBTI":"INFJ", "img":"./images/INFJ.png", "result-title":"뛰어난 통찰력을 가진 사람!"},
+            "ISTP":{"MBTI":"ISTP", "img":"./images/ISTP.png", "result-title":"뛰어난 상황 적응력을 가진 사람!"},
+            "ISFP":{"MBTI":"ISFP", "img":"./images/ISFP.png", "result-title":"따뜻한 감성과 겸손을 가진 사람!"},
+            "INFP":{"MBTI":"INFP", "img":"./images/INFP.png", "result-title":"이상적인 세상을 만들어가는 사람!"},
+            "INTP":{"MBTI":"INTP", "img":"./images/INTP.png", "result-title":"비평적인 관점을 가진 전략가!"},
+            "ESTP":{"MBTI":"ESTP", "img":"./images/ESTP.png", "result-title":"다양함을 선호하는 사람!"},
+            "ESFP":{"MBTI":"ESFP", "img":"./images/ESFP.png", "result-title":"분위기 메이커!"},
+            "ENFP":{"MBTI":"ENFP", "img":"./images/ENFP.png", "result-title":"열정적으로 관계를 만드는 사람!"},
+            "ENTP":{"MBTI":"ENTP", "img":"./images/ENTP.png", "result-title":"풍부한 상상력으로 도전하는 사람!"},
+            "ESTJ":{"MBTI":"ESTJ", "img":"./images/ESTJ.png", "result-title":"사무적, 현실적인 사람!"},
+            "ESFJ":{"MBTI":"ESFJ", "img":"./images/ESFJ.png", "result-title":"친절하게 타인에게 봉사하는 사람!"},
+            "ENFJ":{"MBTI":"ENFJ", "img":"./images/ENFJ.png", "result-title":"타인의 성장에 협동하는 사람!"},
+            "ENTJ":{"MBTI":"ENTJ", "img":"./images/ENTJ.png", "result-title":"타인을 활력적으로 인도하는 사람!"},
+        }
+
+        function show() {
+            $("#start").hide();
+            $("#question").show();
+            next();
+        }
+
+        $("#A").click(function(){
+            let type = $("#type").val();
+            let preValue = $("#" + type).val();
+            $("#" + type).val(parseInt(preValue) + 1);
+            next()
+        })
+
+        $("#B").click(function(){
+            next();
+        })
+
+
+        function next() {
+            if(num == 13) {
+                $("#question").hide();
+                $("#result").attr('style', 'display: flex');
+                let MBTI ="";
+                ($("#EI").val() < 2) ? MBTI += "I" : MBTI += "E";
+                ($("#NS").val() < 2) ? MBTI += "S" : MBTI += "N";
+                ($("#TF").val() < 2) ? MBTI += "F" : MBTI += "T";
+                ($("#PJ").val() < 2) ? MBTI += "J" : MBTI += "P";
+
+                $("#MBTI").html(result[MBTI]["MBTI"]);
+                $("#img").attr('src',result[MBTI]["img"]);
+                $("#result-title").html(result[MBTI]["result-title"]);
+            } else {
+                $(".progress-bar").attr('style','width: calc((100 / 12)*' + num + '%)');
+                $("#number").html(q[num]["number"]);
+                $("#title").html(q[num]["title"]);
+                $("#type").val(q[num]["type"]);
+                $("#A").html(q[num]["A"]);
+                $("#B").html(q[num]["B"]);
+                num++;
+            }
+        }
+    </script>
+
+  </body>
+</html>
